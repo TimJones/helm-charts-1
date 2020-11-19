@@ -41,7 +41,7 @@
       value: {{ .Values.datadog.dogstatsd.tagCardinality | quote }}
     {{- end }}
     {{- if not .Values.clusterAgent.enabled }}
-    {{- if .Values.datadog.leaderElection }}
+    {{- if and (not .Values.clusterAgent.enabled) .Values.datadog.leaderElection }}
     - name: DD_LEADER_ELECTION
       value: {{ .Values.datadog.leaderElection | quote}}
     {{- end }}
